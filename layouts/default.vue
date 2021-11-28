@@ -1,6 +1,5 @@
 <template>
   <div class="bg-beauBlue">
-    <vue-title title="Team Randomizer"></vue-title>
     <nuxt />
   </div>
 </template>
