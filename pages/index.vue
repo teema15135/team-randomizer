@@ -1,8 +1,8 @@
 <template>
-  <div id="container" class="grid gap-6 w-8/12 h-2/6">
+  <div id="container" class="grid gap-6 h-2/6 lg:w-8/12 md:w-11/12 sm:w-11/12">
     <div
       id="input-container"
-      class="bg-white rounded-2xl p-8 w-full h-full col-span-2 shadow-md"
+      class="bg-white rounded-2xl p-8 w-full h-full sm:col-span-2 shadow-md"
     >
       <textarea
         id="input-names-textarea"
@@ -12,7 +12,7 @@
       ></textarea>
     </div>
     <hr
-      class="text-articLime border-articLime border-2 rounded-full col-span-2 shadow-md"
+      class="text-articLime border-articLime border-2 rounded-full sm:col-span-2 shadow-md"
     />
     <div class="team-container team-a bg-prussianBlue truncate">
       <h1 class="bold">Team A</h1>
@@ -75,5 +75,12 @@ export default Vue.extend({
 #input-names-textarea {
   overflow-x: visible;
   overflow-y: scroll;
+}
+
+@media (max-width: 640px) {
+  #container {
+    grid-template-rows: 1fr 1px 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
 }
 </style>
