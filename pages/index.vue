@@ -1,7 +1,7 @@
 <template>
   <div
     id="container"
-    class="grid gap-6 h-2/6 max-w-screen-lg xl:w-9/12 lg:w-10/12 md:w-11/12 sm:w-12/12"
+    class="grid gap-6 h-screen max-w-screen-lg xl:w-9/12 lg:w-10/12 md:w-11/12 sm:w-12/12"
   >
     <div
       id="input-container"
@@ -15,7 +15,7 @@
       ></textarea>
     </div>
     <hr
-      class="text-articLime border-articLime border-2 rounded-full sm:col-span-2 shadow-md"
+      class="text-articLime border-articLime border-2 rounded-full sm:col-span-2 shadow-md w-11/12 justify-self-center"
     />
     <div class="team-container team-a bg-prussianBlue truncate">
       <h1 class="bold">Team A</h1>
@@ -69,6 +69,8 @@ export default Vue.extend({
   @apply min-h-screen mx-auto p-12;
   grid-template-rows: 1fr 1px 1fr;
   grid-template-columns: 1fr 1fr;
+  min-width: 24rem;
+  min-height: 640px;
 }
 
 .team-container {
@@ -84,6 +86,7 @@ export default Vue.extend({
   #container {
     grid-template-rows: 1fr 1px 1fr 1fr;
     grid-template-columns: 1fr;
+    min-height: 800px;
   }
 }
 </style>
