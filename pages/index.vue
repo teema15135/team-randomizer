@@ -1,5 +1,8 @@
 <template>
-  <div id="container" class="grid gap-6 h-2/6 lg:w-8/12 md:w-11/12 sm:w-11/12">
+  <div
+    id="container"
+    class="grid gap-6 h-2/6 max-w-screen-lg xl:w-9/12 lg:w-10/12 md:w-11/12 sm:w-12/12"
+  >
     <div
       id="input-container"
       class="bg-white rounded-2xl p-8 w-full h-full sm:col-span-2 shadow-md"
@@ -77,7 +80,7 @@ export default Vue.extend({
   overflow-y: scroll;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   #container {
     grid-template-rows: 1fr 1px 1fr 1fr;
     grid-template-columns: 1fr;

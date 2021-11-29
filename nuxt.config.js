@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 export default {
   mode: 'spa',
@@ -55,5 +56,9 @@ export default {
   },
   router: {
     base: '/team-randomizer/'
+  },
+  server: {
+    host: process.env.DEV_HOST || 'localhost',
+    port: process.env.DEV_PORT || '3000'
   }
 }
