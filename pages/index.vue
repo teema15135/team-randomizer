@@ -5,24 +5,31 @@
       class="bg-white rounded-2xl p-8 w-full h-full col-span-2 shadow-md"
     >
       <textarea
+        id="input-names-textarea"
         placeholder="Enter name separate by new line..."
         class="bg-transparent placeholder- text-prussianBlue resize-none overflow-auto focus:outline-none w-full h-full"
         v-model="nameString"
       ></textarea>
     </div>
-    <hr class="text-articLime border-articLime border-2 rounded-full col-span-2 shadow-md">
-    <div class="team-container team-a bg-prussianBlue">
+    <hr
+      class="text-articLime border-articLime border-2 rounded-full col-span-2 shadow-md"
+    />
+    <div class="team-container team-a bg-prussianBlue truncate">
       <h1 class="bold">Team A</h1>
       <hr class="text-white my-2" />
       <ul id="team-a">
-        <li v-for="name in nameArray.a" :key="name">{{ name }}</li>
+        <li class="truncate" v-for="name in nameArray.a" :key="name">
+          {{ name }}
+        </li>
       </ul>
     </div>
-    <div class="team-container team-b bg-bittersweet">
+    <div class="team-container team-b bg-bittersweet truncate">
       <h1 class="bold">Team B</h1>
       <hr class="text-white my-2" />
       <ul id="team-b">
-        <li v-for="name in nameArray.b" :key="name">{{ name }}</li>
+        <li class="truncate" v-for="name in nameArray.b" :key="name">
+          {{ name }}
+        </li>
       </ul>
     </div>
   </div>
@@ -58,9 +65,15 @@ export default Vue.extend({
 #container {
   @apply min-h-screen mx-auto p-12;
   grid-template-rows: 1fr 1px 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .team-container {
   @apply px-8 py-6 text-white rounded-2xl shadow-md;
+}
+
+#input-names-textarea {
+  overflow-x: visible;
+  overflow-y: scroll;
 }
 </style>
