@@ -10,9 +10,10 @@
       <textarea
         id="input-names-textarea"
         placeholder="Enter name separate by new line..."
-        class="bg-transparent placeholder- text-prussianBlue resize-none overflow-auto focus:outline-none w-full h-full"
+        class="bg-transparent placeholder- text-prussianBlue resize-none overflow-auto focus:outline-none w-full"
         v-model="nameString"
       ></textarea>
+      <RefreshButton v-on:click.native="refresh()" />
     </div>
     <hr
       class="text-articLime border-articLime border-2 rounded-full sm:col-span-2 shadow-md w-11/12 justify-self-center"
@@ -51,11 +52,9 @@ export default Vue.extend({
   },
   computed: {
     nameArray: function(): { a: string[]; b: string[] } {
-      let totalArray = this.splitToSet(this.nameString)
-        .filter(value => {
-          return value.trim() != ''
-        })
-        .sort(() => Math.random() - 0.5)
+      let totalArray = this.filterEmpty(this.splitToSet(this.nameString)).sort(
+        () => Math.random() - 0.5
+      )
       let half = Math.ceil(totalArray.length / 2)
       return {
         a: totalArray.slice(0, half),
@@ -66,7 +65,7 @@ export default Vue.extend({
   watch: {
     nameString: function(val) {
       this.setNameStringStorage(
-        this.splitToSet(val).filter(value => value.trim() != '').join('\n')
+        this.filterEmpty(this.splitToSet(val)).join('\n')
       )
     }
   },
@@ -77,11 +76,19 @@ export default Vue.extend({
     splitToSet: function(str: string): string[] {
       return [...new Set(str.split('\n'))]
     },
+    filterEmpty: function(strArray: string[]): string[] {
+      return strArray.map(value => value.trim()).filter(value => value != '')
+    },
     getNameStringStorage: function(): string {
       return localStorage.getItem(LOCAL_STORAGE_NAME_KEY) || ''
     },
     setNameStringStorage: function(val: string) {
       localStorage.setItem(LOCAL_STORAGE_NAME_KEY, val)
+    },
+    refresh: function() {
+      let originLength = this.nameString.length
+      this.nameString = this.nameString + ' '
+      this.nameString = this.nameString.slice(0, originLength)
     }
   }
 })
@@ -103,6 +110,10 @@ export default Vue.extend({
 #input-names-textarea {
   overflow-x: visible;
   overflow-y: scroll;
+  min-height: 95%;
+  
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @media (max-width: 639px) {
