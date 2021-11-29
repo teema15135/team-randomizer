@@ -41,6 +41,8 @@
 <script lang="ts">
 import Vue from 'vue'
 
+const LOCAL_STORAGE_NAME_KEY = 'nameString'
+
 export default Vue.extend({
   data() {
     return {
@@ -49,7 +51,7 @@ export default Vue.extend({
   },
   computed: {
     nameArray: function(): { a: string[]; b: string[] } {
-      let totalArray = [...new Set(this.nameString.split('\n'))]
+      let totalArray = this.splitToSet(this.nameString)
         .filter(value => {
           return value.trim() != ''
         })
@@ -59,6 +61,27 @@ export default Vue.extend({
         a: totalArray.slice(0, half),
         b: totalArray.slice(half)
       }
+    }
+  },
+  watch: {
+    nameString: function(val) {
+      this.setNameStringStorage(
+        this.splitToSet(val).filter(value => value.trim() != '').join('\n')
+      )
+    }
+  },
+  mounted() {
+    this.nameString = this.getNameStringStorage()
+  },
+  methods: {
+    splitToSet: function(str: string): string[] {
+      return [...new Set(str.split('\n'))]
+    },
+    getNameStringStorage: function(): string {
+      return localStorage.getItem(LOCAL_STORAGE_NAME_KEY) || ''
+    },
+    setNameStringStorage: function(val: string) {
+      localStorage.setItem(LOCAL_STORAGE_NAME_KEY, val)
     }
   }
 })
